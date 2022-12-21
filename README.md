@@ -1,1 +1,1 @@
-# goit-node-bw-1
+# goit-node-hw-1
