@@ -1,7 +1,4 @@
-// index.js
 const argv = require("yargs").argv;
-
-// TODO: рефакторить
 
 const {
   listContacts,
