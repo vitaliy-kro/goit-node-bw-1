@@ -1,28 +1,47 @@
-const argv = require("yargs").argv;
+const { Command } = require("commander");
 
 const {
-  listContacts,
+  getContacts,
   getContactById,
   removeContact,
   addContact,
 } = require("./contacts");
 
+const program = new Command();
+program
+  .option("-a, --action <type>", "choose action")
+  .option("-i, --id <type>", "user id")
+  .option("-n, --name <type>", "user name")
+  .option("-e, --email <type>", "user email")
+  .option("-p, --phone <type>", "user phone");
+
+program.parse(process.argv);
+
+const argv = program.opts();
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
-      listContacts();
+      getContacts()
+        .then((contacts) => console.log(contacts))
+        .catch((err) => console.log(err.message));
       break;
 
     case "get":
-      getContactById(id);
+      getContactById(id)
+        .then((contact) => console.log(contact))
+        .catch((err) => console.log(err.message));
       break;
 
     case "add":
-      addContact(name, email, phone);
+      addContact(name, email, phone)
+        .then((_) => console.log(`Contact ${name} added succesfully`))
+        .catch((err) => console.log(err));
       break;
 
     case "remove":
-      removeContact(id);
+      removeContact(id).then((_) =>
+        console.log(`Contact with id-${id} removed successfully`)
+      );
       break;
 
     default:

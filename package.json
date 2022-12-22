@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/vitaliy-kro/goit-node-hw-1#readme",
   "devDependencies": {
+    "commander": "^9.4.1",
     "nodemon": "^2.0.20",
     "yargs": "^17.6.2"
   }
